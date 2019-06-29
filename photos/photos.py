@@ -118,7 +118,7 @@ def read_notes(filename, msg=None):
 def enqueue_resize(orig, resized, spec=(640, 480, 80)):
     if resized not in DEFAULT_CONFIG['queue_resize']:
         DEFAULT_CONFIG['queue_resize'][resized] = (orig, spec)
-    elif DEFAULT_CONFIG['queue_resize'][resized] != (orig, spec):
+    elif DEFAULT_CONFIG['queue_resize'][resized] != (orig, spec) and not orig.endswith("gif"):
         logger.error('photos: resize conflict for {}, {}-{} is not {}-{}'.format(resized, DEFAULT_CONFIG['queue_resize'][resized][0], DEFAULT_CONFIG['queue_resize'][resized][1], orig, spec))
 
 
