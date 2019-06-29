@@ -260,6 +260,10 @@ def resize_worker(orig, resized, spec, settings):
 
     logger.info('photos: make photo {} -> {}'.format(orig, resized))
     im = Image.open(orig)
+    if orig.endswith("gif"):
+        logger.info("photos: skip resizing for GIF")
+        im.save(resized, 'gif')
+        return
 
     if ispiexif and settings['PHOTO_EXIF_KEEP'] and im.format == 'JPEG':  # Only works with JPEG exif for sure.
         try:
